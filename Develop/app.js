@@ -1,4 +1,4 @@
-const Manager = require("./lib/Manager/");
+const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
@@ -9,11 +9,92 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { hasUncaughtExceptionCaptureCallback } = require("process");
+const {
+    hasUncaughtExceptionCaptureCallback
+} = require("process");
+const Employee = require("./lib/Employee");
 
+const Employees = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+
+const genericQuestions = [{
+        type: "input",
+        message: "Enter your email address: ",
+        name: "email",
+    },
+    {
+        type: "input",
+        message: "Enter the ID: ",
+        name: "id",
+    },
+    {
+        type: "input",
+        message: "Enter name: ",
+        name: "name",
+    }
+]
+const mgrQuestion = [{
+    type: "input",
+    message: "Enter the office number: ",
+    name: "officeNumber",
+}]
+
+const internQuestion = [{
+    type: "input",
+    message: "Enter your school: ",
+    name: "school",
+}]
+
+const engineerQuestion = [{
+    type: "input",
+    message: "Enter your GitHub name: ",
+    name: "github",
+}]
+
+const numberEmp = [{
+    type: "input",
+    message: "How many employees?: ",
+    name: "numberEmployees",
+}]
+
+const empRole = [{
+    type: "list",
+    message: "What is this team member's role?: ",
+    choices: ["Engineer", "Intern"],
+    name: "role",
+}]
+
+async function init() {
+
+    var general = await inquirer.prompt(genericQuestions)
+    var general1 = await inquirer.prompt(mgrQuestion)
+
+    const manager = new Manager(general.name, general.id, general.email, general1.officeNumber);
+    Employees.push(manager)
+
+    var numEmployees = await inquirer.prompt(numberEmp);
+
+    console.log("number of employees: " + numEmployees.numberEmployees);
+    for (let i = 0; i < numEmployees.numberEmployees; i++) {
+        var role = await inquirer.prompt(empRole);
+
+        if (role.role === "Engineer") {
+            var eng = await inquirer.prompt(engineerQuestion);
+            var engineer = new Engineer(general.name, general.id, general.email, eng.github);
+            Employees.push(engineer);
+        } else {
+            var intern = await inquirer.prompt(internQuestion);
+            var internMember = new Intern(general.name, general.id, general.email, intern.school);
+            Employees.push(internMember);
+        }
+    }
+    console.log(Employees);
+    var htmljohn = render(Employees);
+
+    console.log(htmljohn);
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -34,3 +115,6 @@ const { hasUncaughtExceptionCaptureCallback } = require("process");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+init();
