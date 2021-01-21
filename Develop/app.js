@@ -68,6 +68,7 @@ const empRole = [{
 
 async function init() {
 
+    console.log("First, enter the Team Manager information");
     var general = await inquirer.prompt(genericQuestions)
     var general1 = await inquirer.prompt(mgrQuestion)
 
@@ -76,9 +77,9 @@ async function init() {
 
     var numEmployees = await inquirer.prompt(numberEmp);
 
-    console.log("number of employees: " + numEmployees.numberEmployees);
     for (let i = 0; i < numEmployees.numberEmployees; i++) {
         var role = await inquirer.prompt(empRole);
+        var general = await inquirer.prompt(genericQuestions);
 
         if (role.role === "Engineer") {
             var eng = await inquirer.prompt(engineerQuestion);
@@ -91,10 +92,11 @@ async function init() {
         }
     }
     console.log(Employees);
-    var htmljohn = render(Employees);
-
-    console.log(htmljohn);
+    htmlJohn = render(Employees);
+    writeFile();
 }
+
+var htmlJohn;
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -105,6 +107,11 @@ async function init() {
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
+
+function writeFile() {
+    fs.writeFile(outputPath, htmlJohn, (err) =>
+    err ? console.error(err) : console.log('Success'));
+}
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
