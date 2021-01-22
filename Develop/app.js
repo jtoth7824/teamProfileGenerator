@@ -24,16 +24,43 @@ const genericQuestions = [{
         type: "input",
         message: "Enter your email address: ",
         name: "email",
+        validate: emailEntry => {
+            if (emailEntry) {
+                return true;
+            }
+            else {
+                console.log ("Please enter an email address!");
+            }
+        }
     },
     {
         type: "input",
         message: "Enter the ID: ",
         name: "id",
+        validate: idEntry => {
+            if (!isNaN(idEntry)) {
+                if(!(idEntry === "")) {
+                    return true;
+                }
+                console.log("You must enter an ID number.");
+            }
+            else {
+                console.log ("Please enter a number for the ID!");
+            }
+        }
     },
     {
         type: "input",
         message: "Enter name: ",
         name: "name",
+        validate: nameEntry => {
+            if (nameEntry) {
+                return true;
+            }
+            else {
+                console.log ("Please enter a name!");
+            }
+        }
     }
 ]
 
@@ -50,24 +77,62 @@ const mgrQuestion = [{
     type: "input",
     message: "Enter the office number: ",
     name: "officeNumber",
+    validate: officeEntry => {
+        if (!isNaN(officeEntry)) {
+            if(!(officeEntry === "")) {
+                return true;
+            }
+            console.log("You must enter an office number.");
+        }
+        else {
+            console.log ("Please enter a number for the office number!");
+        }
+    }
 }]
 
 const internQuestion = [{
     type: "input",
     message: "Enter your school: ",
     name: "school",
+    validate: schoolEntry => {
+        if (schoolEntry) {
+            return true;
+        }
+        else {
+            console.log ("Please enter a school!");
+        }
+    }
 }]
 
 const engineerQuestion = [{
     type: "input",
     message: "Enter your GitHub name: ",
     name: "github",
+    validate: githubEntry => {
+        if (githubEntry) {
+            return true;
+        }
+        else {
+            console.log ("Please enter a Github name!");
+        }
+    }
 }]
 
 const numberEmp = [{
     type: "input",
     message: "How many employees?: ",
     name: "numberEmployees",
+    validate: empCountEntry => {
+        if (!isNaN(empCountEntry)) {
+            if(!(empCountEntry === "")) {
+                return true;
+            }
+            console.log("You must enter how many employees.");
+        }
+        else {
+            console.log ("Please enter a number for the employee count!");
+        }
+    }
 }]
 
 const empRole = [{
