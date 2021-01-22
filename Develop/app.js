@@ -4,6 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const validator = require("email-validator");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -25,7 +26,8 @@ const genericQuestions = [{
         message: "Enter your email address: ",
         name: "email",
         validate: emailEntry => {
-            if (emailEntry) {
+            var checkEmail = validator.validate(emailEntry);
+            if (checkEmail) {
                 return true;
             }
             else {
