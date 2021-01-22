@@ -15,6 +15,7 @@ const {
 const Employee = require("./lib/Employee");
 
 const Employees = [];
+var htmlJohn;
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -35,6 +36,16 @@ const genericQuestions = [{
         name: "name",
     }
 ]
+
+// HINT: each employee type (manager, engineer, or intern) has slightly different
+// information; write your code to ask different questions via inquirer depending on
+// employee type.
+
+// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
+// and Intern classes should all extend from a class named Employee; see the directions
+// for further information. Be sure to test out each class and verify it generates an
+// object with the correct structure and methods. This structure will be crucial in order
+// for the provided `render` function to work! ```
 const mgrQuestion = [{
     type: "input",
     message: "Enter the office number: ",
@@ -77,6 +88,7 @@ async function init() {
 
     var numEmployees = await inquirer.prompt(numberEmp);
 
+    console.log("Now, enter each Team Member's information");
     for (let i = 0; i < numEmployees.numberEmployees; i++) {
         var role = await inquirer.prompt(empRole);
         var general = await inquirer.prompt(genericQuestions);
@@ -92,15 +104,12 @@ async function init() {
         }
     }
     console.log(Employees);
-    htmlJohn = render(Employees);
-    writeFile();
-}
-
-var htmlJohn;
-
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+    htmlJohn = render(Employees);
+    writeFile();
+}
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
@@ -109,19 +118,12 @@ var htmlJohn;
 // does not.
 
 function writeFile() {
+    if(!fs.existsSync(OUTPUT_DIR)) {
+        console.log("directory doesn't exist");
+        fs.mkdirSync(OUTPUT_DIR);
+    }
     fs.writeFile(outputPath, htmlJohn, (err) =>
     err ? console.error(err) : console.log('Success'));
 }
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
-
 
 init();
