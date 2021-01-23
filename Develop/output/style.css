@@ -1,12 +1,45 @@
 .card {
     border-radius: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
 }
 
 .card-header:first-child {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    background-color: blue;
+    color: white;
+}
+
+.card-body {
+    background-color: lightgray;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .cardBackground {
     background-color: lightgray;
 }
+
+.card-columns {
+
+    @include media-breakpoint-only(xs) {
+        column-count: 1;
+    }
+
+    @include media-breakpoint-only(sm) {
+        column-count: 2;
+    }
+
+    @include media-breakpoint-only(md) {
+        column-count: 3;
+    }
+
+    @include media-breakpoint-only(lg) {
+      column-count: 3;
+    }
+    @include media-breakpoint-only(xl) {
+      column-count: 5;
+    }
+  }
