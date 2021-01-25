@@ -16,31 +16,34 @@ const {
 const Employee = require("./lib/Employee");
 
 const Employees = [];
-var htmlJohn;
+var renderedPage;
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
+// Array to hold answers to generic questions applicable for all employee types
 const genericQuestions = [{
+    // Ask user for validly formatted email address
         type: "input",
         message: "Enter your email address: ",
         name: "email",
+        // Validation of email address, utilized an npm package that was installed for validation
         validate: emailEntry => {
             var checkEmail = validator.validate(emailEntry);
             if (checkEmail) {
                 return true;
             }
             else {
-                console.log ("Please enter an email address!");
+                console.log ("Please enter a validly formatted email address!");
             }
         }
     },
     {
+        // Ask user for an ID number
         type: "input",
         message: "Enter the ID: ",
         name: "id",
         validate: idEntry => {
+            // Check that entry is a number
             if (!isNaN(idEntry)) {
+                // Check that entry is not an empty string
                 if(!(idEntry === "")) {
                     return true;
                 }
@@ -52,10 +55,12 @@ const genericQuestions = [{
         }
     },
     {
+        // Ask user for name
         type: "input",
         message: "Enter name: ",
         name: "name",
         validate: nameEntry => {
+            // Check that user entered a string for name
             if (nameEntry) {
                 return true;
             }
@@ -66,21 +71,16 @@ const genericQuestions = [{
     }
 ]
 
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
+// Array for answer to office number
 const mgrQuestion = [{
+    // Ask user for the manager office number
     type: "input",
     message: "Enter the office number: ",
     name: "officeNumber",
     validate: officeEntry => {
+        // Check that office number is a number
         if (!isNaN(officeEntry)) {
+            // Check that office number is not blank
             if(!(officeEntry === "")) {
                 return true;
             }
@@ -92,11 +92,14 @@ const mgrQuestion = [{
     }
 }]
 
+// Array for Intern specific answers
 const internQuestion = [{
+    // Ask user for Intern school name
     type: "input",
     message: "Enter your school: ",
     name: "school",
     validate: schoolEntry => {
+        // Check that user provided a string
         if (schoolEntry) {
             return true;
         }
@@ -106,11 +109,14 @@ const internQuestion = [{
     }
 }]
 
+// Array for Engineer specific answers
 const engineerQuestion = [{
+    // Ask user for Engineer Github name
     type: "input",
     message: "Enter your GitHub name: ",
     name: "github",
     validate: githubEntry => {
+        // Check that user provided a string
         if (githubEntry) {
             return true;
         }
@@ -120,12 +126,16 @@ const engineerQuestion = [{
     }
 }]
 
+// Array for user input regarding how many employees will be created
 const numberEmp = [{
+    // Ask user for how many employees to create
     type: "input",
     message: "How many employees?: ",
     name: "numberEmployees",
     validate: empCountEntry => {
+        // Check that number of employees is a number
         if (!isNaN(empCountEntry)) {
+            // Check that user entered something
             if(!(empCountEntry === "")) {
                 return true;
             }
@@ -137,6 +147,7 @@ const numberEmp = [{
     }
 }]
 
+// Array for user input regarding role of each employee (Engineer or Intern)
 const empRole = [{
     type: "list",
     message: "What is this team member's role?: ",
@@ -146,51 +157,65 @@ const empRole = [{
 
 async function init() {
 
+    // Initial instructions to user
     console.log("First, enter the Team Manager information");
-    var general = await inquirer.prompt(genericQuestions)
-    var general1 = await inquirer.prompt(mgrQuestion)
+    // Query user for answers to generic questions for the manager, wait until all answers provided before advancing to next line
+    var mgr = await inquirer.prompt(genericQuestions)
+    // Query user for answer to manager question, wait until answer provided before advancing to next line
+    var mgr1 = await inquirer.prompt(mgrQuestion)
 
-    const manager = new Manager(general.name, general.id, general.email, general1.officeNumber);
+    // Create new Manager object
+    const manager = new Manager(mgr.name, mgr.id, mgr.email, mgr1.officeNumber);
+    // Push Manager object to Employees array
     Employees.push(manager)
 
+    // Query user for number of employees to create (Engineer/Intern), wait until answer provided before advancing to next line
     var numEmployees = await inquirer.prompt(numberEmp);
 
+    // Another instructional line to the user
     console.log("Now, enter each Team Member's information");
+    // Loop to create all the employees based upon user entry
     for (let i = 0; i < numEmployees.numberEmployees; i++) {
+        // Query user for role of employee, wait until answer provided before advancing to next line
         var role = await inquirer.prompt(empRole);
+        // Query user for generic questions, wait until all answers provided before advancing to next line
         var general = await inquirer.prompt(genericQuestions);
 
+        // Decide which type of employee specific information is needed
         if (role.role === "Engineer") {
+            // Query user for Engineer question, wait until answer provided before advancing to next line
             var eng = await inquirer.prompt(engineerQuestion);
+            // Create a new Engineer object
             var engineer = new Engineer(general.name, general.id, general.email, eng.github);
+            // Push Engineer object to Employees array
             Employees.push(engineer);
         } else {
+            // Query user for Intern question, wait until answer provided before advancing to next line
             var intern = await inquirer.prompt(internQuestion);
+            // Create a new Intern object
             var internMember = new Intern(general.name, general.id, general.email, intern.school);
+            // Push Intern object to Employees array
             Employees.push(internMember);
         }
     }
-    console.log(Employees);
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-    htmlJohn = render(Employees);
+
+    // Pass the Employees function to the render function to generate the output html page
+    renderedPage = render(Employees);
+    // Call function to write out the html file
     writeFile();
 }
 
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
+// Function that writes out the html file
 function writeFile() {
+    // Check if the specified output directory already exists
     if(!fs.existsSync(OUTPUT_DIR)) {
-        console.log("directory doesn't exist");
+        // Since directory doesn't exist, create the specified directory
         fs.mkdirSync(OUTPUT_DIR);
     }
-    fs.writeFile(outputPath, htmlJohn, (err) =>
+    // Write out the html page to a file
+    fs.writeFile(outputPath, renderedPage, (err) =>
     err ? console.error(err) : console.log('Success'));
 }
 
+// initial function that kicks off the application
 init();

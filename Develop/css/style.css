@@ -1,0 +1,39 @@
+.card {
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.card-header:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: black;
+    color: white;
+}
+
+.jumbotron {
+    background-color: rgb(87, 85, 85);
+}
+
+.card-body {
+    background-color: rgb(87, 85, 85);
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.cardBackground {
+    background-color: rgb(185, 22, 22);
+}
+
+/* setting up background image to cover entire page */
+body {
+    background-image: url("../images/pattern-2982849_1920.jpg");
+    background-attachment: fixed;
+  }
+
+@media (min-width: 576px) {
+.jumbotron {
+    padding: 2rem 1rem;
+}
+}
