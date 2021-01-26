@@ -76,4 +76,4 @@ Direct link to repository:  https://github.com/jtoth7824/teamProfileGenerator
 
 The following link shows a sample team profile html file generated with this application
 
-https://github.com/jtoth7824/teamProfileGenerator/blob/main/team.html
+https://github.com/jtoth7824/teamProfileGenerator/tree/main/Develop/output/team.html
