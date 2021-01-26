@@ -28,10 +28,11 @@
 
 /* setting up background image to cover entire page */
 body {
-    background-image: url("../images/pattern-2982849_1920.jpg");
+    background-image: url("../images/backImage.jpg");
     background-attachment: fixed;
   }
 
+/* reducing amount of space jumbotron takes up */
 @media (min-width: 576px) {
 .jumbotron {
     padding: 2rem 1rem;
