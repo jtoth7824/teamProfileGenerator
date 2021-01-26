@@ -26,7 +26,7 @@ As an added bonus, the user inputs are all validated for correct information bef
 The following is a screenshot of the Team Profile Generator application.
 
 <p align="center">
-  <img src="./assets/images/teamProfileGenerator.png" alt="Team Profile Generator application screenshot">
+  <img src="./Develop/images/teamProfileGenerator.png" alt="Team Profile Generator application screenshot">
 </p>
 
 ## Installation
