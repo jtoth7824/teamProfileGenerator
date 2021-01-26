@@ -17,18 +17,16 @@ var renderedPage;
 
 // Array to hold answers to generic questions applicable for all employee types
 const genericQuestions = [{
-    // Ask user for validly formatted email address
+        // Ask user for name
         type: "input",
-        message: "Enter your email address: ",
-        name: "email",
-        // Validation of email address, utilized an npm package that was installed for validation
-        validate: emailEntry => {
-            var checkEmail = validator.validate(emailEntry);
-            if (checkEmail) {
+        message: "Enter name: ",
+        name: "name",
+        validate: nameEntry => {
+            // Check that user entered a string for name
+            if (nameEntry) {
                 return true;
-            }
-            else {
-                console.log ("Please enter a validly formatted email address!");
+            } else {
+                console.log("Please enter a name!");
             }
         }
     },
@@ -41,28 +39,27 @@ const genericQuestions = [{
             // Check that entry is a number
             if (!isNaN(idEntry)) {
                 // Check that entry is not an empty string
-                if(!(idEntry === "")) {
+                if (!(idEntry === "")) {
                     return true;
                 }
                 console.log("You must enter an ID number.");
-            }
-            else {
-                console.log ("Please enter a number for the ID!");
+            } else {
+                console.log("Please enter a number for the ID!");
             }
         }
-    },
+    },    
     {
-        // Ask user for name
+        // Ask user for validly formatted email address
         type: "input",
-        message: "Enter name: ",
-        name: "name",
-        validate: nameEntry => {
-            // Check that user entered a string for name
-            if (nameEntry) {
+        message: "Enter your email address: ",
+        name: "email",
+        // Validation of email address, utilized an npm package that was installed for validation
+        validate: emailEntry => {
+            var checkEmail = validator.validate(emailEntry);
+            if (checkEmail) {
                 return true;
-            }
-            else {
-                console.log ("Please enter a name!");
+            } else {
+                console.log("Please enter a validly formatted email address!");
             }
         }
     }
@@ -78,13 +75,12 @@ const mgrQuestion = [{
         // Check that office number is a number
         if (!isNaN(officeEntry)) {
             // Check that office number is not blank
-            if(!(officeEntry === "")) {
+            if (!(officeEntry === "")) {
                 return true;
             }
             console.log("You must enter an office number.");
-        }
-        else {
-            console.log ("Please enter a number for the office number!");
+        } else {
+            console.log("Please enter a number for the office number!");
         }
     }
 }]
@@ -99,9 +95,8 @@ const internQuestion = [{
         // Check that user provided a string
         if (schoolEntry) {
             return true;
-        }
-        else {
-            console.log ("Please enter a school!");
+        } else {
+            console.log("Please enter a school!");
         }
     }
 }]
@@ -116,9 +111,8 @@ const engineerQuestion = [{
         // Check that user provided a string
         if (githubEntry) {
             return true;
-        }
-        else {
-            console.log ("Please enter a Github name!");
+        } else {
+            console.log("Please enter a Github name!");
         }
     }
 }]
@@ -133,13 +127,12 @@ const numberEmp = [{
         // Check that number of employees is a number
         if (!isNaN(empCountEntry)) {
             // Check that user entered something
-            if(!(empCountEntry === "")) {
+            if (!(empCountEntry === "")) {
                 return true;
             }
             console.log("You must enter how many employees.");
-        }
-        else {
-            console.log ("Please enter a number for the employee count!");
+        } else {
+            console.log("Please enter a number for the employee count!");
         }
     }
 }]
@@ -205,13 +198,13 @@ async function init() {
 // Function that writes out the html file
 function writeFile() {
     // Check if the specified output directory already exists
-    if(!fs.existsSync(OUTPUT_DIR)) {
+    if (!fs.existsSync(OUTPUT_DIR)) {
         // Since directory doesn't exist, create the specified directory
         fs.mkdirSync(OUTPUT_DIR);
     }
     // Write out the html page to a file
     fs.writeFile(outputPath, renderedPage, (err) =>
-    err ? console.error(err) : console.log('Success'));
+        err ? console.error(err) : console.log('Success'));
 }
 
 // initial function that kicks off the application
