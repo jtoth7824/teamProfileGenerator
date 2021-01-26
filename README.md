@@ -12,12 +12,12 @@ As an added bonus, the user inputs are all validated for correct information bef
 
 ## Table of Contents
 
-* [Screenshot](#Screenshot)
+* [Screenshots](#Screenshots)
 * [Installation](#Installation)
 * [Usage](#Usage)
 * [Support](#Support)
-* [Technologies](#Technologies_Used)
-* [Video](#Video_Walkthrough)
+* [Technologies](#Technologies)
+* [Video](#Video)
 * [Repository](#Repository)
 * [Output](#Output)
 
