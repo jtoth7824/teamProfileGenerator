@@ -1,3 +1,4 @@
+/* round corners on card, set margins to space cards apart */
 .card {
     border-radius: 20px;
     margin-right: 10px;
@@ -5,6 +6,7 @@
     margin-bottom: 20px;
 }
 
+/* change background color of initial card header background, round corners */
 .card-header:first-child {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -12,18 +14,16 @@
     color: white;
 }
 
+/* change color of jumbotron background */
 .jumbotron {
     background-color: rgb(87, 85, 85);
 }
 
+/* change color of card body background, round the corners */
 .card-body {
     background-color: rgb(87, 85, 85);
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-}
-
-.cardBackground {
-    background-color: rgb(185, 22, 22);
 }
 
 /* setting up background image to cover entire page */
