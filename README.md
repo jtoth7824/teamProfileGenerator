@@ -49,8 +49,7 @@ The application will proceed to ask the user a series of questions about the mak
 
 ## Support
 
-Please email me for further information
-<div><h5>John Toth</h5>jtoth7824@gmail.com</div>
+Please email me for further information jtoth7824@gmail.com
 
 
 ## Technologies
