@@ -8,7 +8,7 @@ Once the final block of employee information is entered, an HTML file is output 
 
 The application utilized the Inquirer package to retrieve the user input.  It also utilized an email-validator package to validate if the entered email address is correct formatted.  Node.js is used to execute the application at the command line.
 
-As an added bonus, the user inputs are all validated for correct information before allowing the prompts to continue.  
+As an added bonus, the user inputs are all validated for correct information before allowing the prompts to continue.  Additionally, this project was added to my updated portfolio project page which can be found here:  https://jtoth7824.github.io/portfolio/
 
 ## Table of Contents
 
