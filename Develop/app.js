@@ -150,6 +150,7 @@ async function init() {
     // Initial instructions to user
     console.log("First, enter the Team Manager information");
     // Query user for answers to generic questions for the manager, wait until all answers provided before advancing to next line
+    roleType = "Manager";
     var mgr = await inquirer.prompt(genericQuestions)
     // Query user for answer to manager question, wait until answer provided before advancing to next line
     var mgr1 = await inquirer.prompt(mgrQuestion)
