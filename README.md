@@ -66,7 +66,7 @@ Please email me for further information
 
 Due to there being no front end to this project that a user can open in a browser, please view the following video link to get a feel for how the command line application is executed and types of inputs required by the user in order to generate the team profile.
 
-https://drive.google.com/file/d/1UeRR1pywB0RzW9oeA2HV9D6JtXeJyhOR/view?usp=sharing
+https://drive.google.com/file/d/1dMmgd3qgIDM8XDGsh29zjFfZj8kDA0Og/view
 
 ## Repository
 
